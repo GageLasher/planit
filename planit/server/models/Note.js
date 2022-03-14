@@ -1,16 +1,18 @@
 import { Schema } from "mongoose";
 
-export const SprintSchema = new Schema({
-    name: {type: String, required: true},
+export const NoteSchema = new Schema({
+    body: {type: String, required: true},
     projectId: {type: Schema.Types.ObjectId, ref: 'Project'},
+    taskId: {type: Schema.Types.ObjectId, ref: 'Task'},
     creatorId: {type: Schema.Types.ObjectId, ref: 'Profile', required: true}
+    
 
     
 },
 { timestamps: true, toJSON: { virtuals: true } }
 )
 
-SprintSchema.virtual('creator', {
+NoteSchema.virtual('creator', {
     localField: 'creatorId',
     foreignField: '_id',
     justOne: true,
