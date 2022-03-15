@@ -11,7 +11,7 @@ class DbContext {
 
   Projects = mongoose.model('Project', ProjectSchema)
 
-  Sprint = mongoose.model('Sprint', SprintSchema)
+  Sprints = mongoose.model('Sprint', SprintSchema)
 }
 
 export const dbContext = new DbContext()
