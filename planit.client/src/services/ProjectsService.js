@@ -18,6 +18,7 @@ class ProjectsService {
     async getActiveProject(id){
         const res = await api.get('api/projects/'+id)
         AppState.activeProject = res.data
+        AppState.sprints = AppState.sprints.filter(s => s.projectId == id)
     }
     async remove(id){
         const res = await api.delete('api/projects/'+id)
