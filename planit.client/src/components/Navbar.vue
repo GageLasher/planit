@@ -1,12 +1,14 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-white px-3">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <div class="d-flex flex-column align-items-center">
+      <div class="d-flex align-items-center">
         <img
+        class="me-3"
           alt="logo"
-          src="../assets/img/cw-logo.png"
+          src="https://webstockreview.net/images/clipart-rocket-launched-7.png"
           height="45"
         />
+        <h2 class="text-dark">PlanIt</h2>
       </div>
     </router-link>
     <button
@@ -23,9 +25,7 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
         <li>
-          <router-link :to="{ name: 'About' }" class="btn text-success lighten-30 selectable text-uppercase">
-            About
-          </router-link>
+         
         </li>
       </ul>
       <span class="navbar-text">
@@ -45,12 +45,15 @@
             id="authDropdown"
           >
             <img
-              :src="user.picture"
-              alt="user photo"
+              
+              :src="account.picture"
+              alt="account photo"
               height="40"
-              class="rounded"
+              class="rounded selectable"
+               data-bs-toggle="modal"
+            data-bs-target="#edit-profile"
             />
-            <span class="mx-3 text-success lighten-30">{{ user.name }}</span>
+            <span class="mx-3 text-success lighten-30">{{ account.name }}</span>
           </div>
           <div
             class="dropdown-menu p-0 list-group w-100"
@@ -72,6 +75,12 @@
         </div>
       </span>
     </div>
+    <div>
+      <Modal id="edit-profile">
+      <template #title> edit profile</template>
+      <template #body><EditProfile /> </template>
+    </Modal>
+    </div>
   </nav>
 </template>
 
@@ -83,6 +92,7 @@ export default {
   setup() {
     return {
       user: computed(() => AppState.user),
+      account: computed(() => AppState.account),
       async login() {
         AuthService.loginWithPopup()
       },
