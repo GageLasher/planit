@@ -16,7 +16,7 @@ class ProjectsService {
         return projects
     }
   async getProject(id) {
-       const project = await dbContext.Projects.findById(id).populate('creator', 'name')
+       const project = await dbContext.Projects.findById(id).populate('creator')
        if(!project){
         throw new BadRequest('No project to be found')
        }
@@ -24,7 +24,7 @@ class ProjectsService {
    }
    async create(body) {
         const project = await dbContext.Projects.create(body)
-        await project.populate('creator', 'name')
+        await project.populate('creator')
         return project
     }
 

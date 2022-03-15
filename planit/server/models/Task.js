@@ -19,3 +19,9 @@ TaskSchema.virtual('creator', {
     justOne: true,
     ref: 'Profile'
   })
+  TaskSchema.virtual('sprint', {
+    localField: 'sprintId',
+    foreignField: '_id',
+    justOne: true,
+    ref: 'Sprint'
+  })

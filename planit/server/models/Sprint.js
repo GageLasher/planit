@@ -10,9 +10,9 @@ export const SprintSchema = new Schema({
 { timestamps: true, toJSON: { virtuals: true } }
 )
 
-SprintSchema.virtual('project', {
-    localField: 'projectId',
+SprintSchema.virtual('creator', {
+    localField: 'creatorId',
     foreignField: '_id',
-    ref: 'Project',
+    ref: 'Profile',
     justOne: true
   })
