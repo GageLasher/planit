@@ -69,6 +69,7 @@ export default {
             try {
                      if(route.name == "Project"){
                     await projectsService.getActiveProject(route.params.id)
+                    await sprintsService.getSprints(route.params.id)
                      }
             } catch (error) {
                 logger.error(error.message)

@@ -21,13 +21,19 @@ import { computed } from '@vue/reactivity'
 import { AppState } from '../AppState'
 import { projectsService } from '../services/ProjectsService'
 import Pop from '../utils/Pop'
+import { useRouter } from 'vue-router'
 export default {
     setup(){
+        const router = useRouter()
         return {
             projects: computed(() => AppState.projects),
             async setProject(id){
                 try {
                     await projectsService.getActiveProject(id)
+                    router.push({
+                        name: "Project",
+                        params: {id: AppState.activeProject.id}
+                    })
                     
                 } catch (error) {
                     logger.error(error.message)
