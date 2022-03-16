@@ -42,6 +42,7 @@ import { computed, ref } from '@vue/reactivity'
 import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
 import { tasksService } from '../services/TasksService'
+import { Modal } from 'bootstrap'
 export default {
    props: {
        task: {
@@ -57,11 +58,14 @@ export default {
             
             sprints: computed(() => AppState.sprints),
            async editTask(){
-                logger.log(editable.value.sprintId)
+                // logger.log(editable.value.sprintId)
                 props.task.sprintId = editable.value.sprintId
-                logger.log(props.task)
+                // logger.log(props.task)
                 
               await tasksService.edit(props.task)
+              Modal.getOrCreateInstance(
+              document.getElementById(`edit-task` + `${props.task.id}`)
+            ).hide();
            }
         }
     }
