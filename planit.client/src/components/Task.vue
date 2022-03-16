@@ -26,7 +26,7 @@
 
     </div>
 </div>
-       <Modal :id="`edit-task` + task.id">
+       <Modal :id="'edit-task' + task.id">
            <template #title> Edit Task</template>
       <template #body><EditTask :task="task" /> </template>
            </Modal>
@@ -60,7 +60,6 @@ export default {
             async save(){
                 try {
                     await tasksService.edit(props.task)
-                    
                 } catch (error) {
                     logger.error(error)
                     Pop.toast(error.message, "error")
