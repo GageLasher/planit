@@ -15,7 +15,7 @@ async update(update){
     const original = await dbContext.Tasks.findById(update.id)
     original.name = update.name ? update.name : original.name
     original.weight = update.weight != null ? update.weight : original.weight
-    original.isComplete = update.isComplete ? update.isComplete : original.isComplete
+    original.isComplete = update.isComplete !== undefined ? update.isComplete : original.isComplete
     original.sprintId = update.sprintId !== "" ? update.sprintId : original.sprintId
     await original.save()
     await original.populate('sprint')
