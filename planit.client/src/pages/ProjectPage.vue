@@ -1,4 +1,6 @@
 <template>
+    <div class="container-fluid">
+
    <div class="row pt-3">
        <div class="col-1 d-flex flex-column text-center">
            <div class="teemo">
@@ -30,7 +32,7 @@
             data-bs-target="#create-sprint"> Add Sprint</button>
        </div>
            </div>
-           <div class="row" v-for="s in sprints" :key="s.id">
+           <div class="row d-flex" v-for="s in sprints" :key="s.id">
               <Sprint :sprint="s" />
            </div>
        </div>
@@ -48,6 +50,8 @@
       <template #body><SprintForm /> </template>
             </Modal>
     </div>
+        </div>
+
 </template>
 
 
