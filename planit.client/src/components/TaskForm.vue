@@ -40,7 +40,13 @@ import { useRouter } from 'vue-router'
 import { Modal } from 'bootstrap'
 import { sprintsService } from '../services/SprintsService'
 export default {
-    setup(){
+    props: {
+        sprint: {
+            type: Object,
+            required: true
+        }
+    },
+    setup(props){
        const editable = ref({})
        const router = useRouter()
     
@@ -48,6 +54,7 @@ export default {
             editable,
               async createTask(){
                 try {
+                    editable.value.sprintId = props.sprint.id
                     await tasksService.createTask(AppState.activeProject.id, editable.value)
                     Modal.getOrCreateInstance(
               document.getElementById("create-task")

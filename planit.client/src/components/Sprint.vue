@@ -6,6 +6,9 @@
     
 
    <div class="col-8 bg-light rounded shadow p-2">{{sprint.name}}
+       
+           <i class="mdi mdi-weight"> {{totalWeight}} </i>
+       
       
            
        <button class="btn btn-outline-info ms-5" data-bs-toggle="modal"
@@ -24,7 +27,7 @@
 
     <Modal id="create-task">
          <template #title> Add Task</template>
-      <template #body><TaskForm /> </template>
+      <template #body><TaskForm :sprint="sprint" /> </template>
         </Modal>
 
     
@@ -53,17 +56,30 @@ export default {
             required: true
         }
     },
-    setup(){
+    setup(props){
+        
         watchEffect(async () => {
             try {
                 await tasksService.getTasks(AppState.activeProject.id)
+                await tasksService.countTaskWeight(props.sprint.id)
             } catch (error) {
                 logger.error(error.message)
                     Pop.toast(error.message, 'error')
             }
+            
         })
         return {
-            tasks: computed(() => AppState.tasks),
+            tasks: computed(() => AppState.tasks.filter(t => t.sprintId == props.sprint.id)),
+            totalWeight: computed(() => {
+                let total = 0
+               let tasks = AppState.tasks.filter(t => t.sprintId == props.sprint.id)
+               tasks.forEach(t => {
+                   total += t.weight
+
+               });
+               return total
+
+            }),
             async remove(id){
                 try {
                         await sprintsService.remove(AppState.activeProject.id, id)

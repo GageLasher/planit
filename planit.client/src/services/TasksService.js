@@ -16,6 +16,10 @@ class TasksService{
         AppState.tasks = res.data
     }
 
+    async getSprintTasks(id){
+        // let tasks = AppState.tasks.filter(t => t.id)
+    }
+
     async edit(updatedTask){
         // let updatedTask = AppState.tasks.find(t => t.id == id)
         
@@ -23,6 +27,14 @@ class TasksService{
         
         const res = await api.put('api/projects/'+ updatedTask.projectId + '/tasks/' + updatedTask.id, updatedTask)
         logger.log(res.data)
+    }
+    async remove(projectId, id){
+        const res = await api.delete('api/projects/'+ projectId + '/tasks/' + id)
+        AppState.tasks = AppState.tasks.filter(t => t.id != id)
+    }
+
+    async countTaskWeight(id){
+        let tasks = AppState.tasks.filter(t => t.sprintId == id)
     }
 
 }

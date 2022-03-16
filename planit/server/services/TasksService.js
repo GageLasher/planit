@@ -8,7 +8,7 @@ async create(body){
     return task
 }
 async getAll(id){
-    const tasks = await dbContext.Tasks.find({projectId: id})
+    const tasks = await dbContext.Tasks.find({projectId: id}).populate('sprint')
     return tasks
 }
 async update(update){
