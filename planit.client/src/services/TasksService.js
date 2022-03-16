@@ -5,7 +5,7 @@ import { api } from "./AxiosService"
 class TasksService{
     async createTask(projectId, body){
         const res = await api.post('api/projects/'+ projectId + '/tasks', body)
-        // logger.log(res.data)
+        logger.log(res.data)
         AppState.tasks = [...AppState.tasks, res.data]
     }
 
@@ -16,9 +16,7 @@ class TasksService{
         AppState.tasks = res.data
     }
 
-    async getSprintTasks(id){
-        // let tasks = AppState.tasks.filter(t => t.id)
-    }
+   
 
     async edit(updatedTask){
         // let updatedTask = AppState.tasks.find(t => t.id == id)

@@ -12,7 +12,7 @@
       
            
        <button class="btn btn-outline-info ms-5" data-bs-toggle="modal"
-            data-bs-target="#create-task">Add Task +</button>
+            :data-bs-target="`#create-task` + sprint.id">Add Task +</button>
       
            
        <i class="mdi mdi-delete selectable ms-5" @click="remove(sprint.id)" title="delete sprint"></i>
@@ -25,7 +25,7 @@
 
     </div>
 
-    <Modal id="create-task">
+    <Modal :id="`create-task` + sprint.id">
          <template #title> Add Task</template>
       <template #body><TaskForm :sprint="sprint" /> </template>
         </Modal>
@@ -61,7 +61,7 @@ export default {
         watchEffect(async () => {
             try {
                 await tasksService.getTasks(AppState.activeProject.id)
-                await tasksService.countTaskWeight(props.sprint.id)
+               
             } catch (error) {
                 logger.error(error.message)
                     Pop.toast(error.message, 'error')

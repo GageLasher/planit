@@ -4,14 +4,14 @@
     <div class="row p-3">
         <div class="col-12">
             <label for="">Name: </label>
-            <input v-model="editable.name" type="text" name="" id="">
+            <input v-model="task.name" type="text" name="" id="">
         </div>
          <div class="col-12">
             <label for="">Weight: </label>
-            <input v-model="editable.weight" type="number" name="" id="">
+            <input v-model="task.weight" type="number" name="" id="">
         </div>
          <div class="col-12">
-            <select v-model="editable.sprintId" >
+            <select v-model="task.sprintId" @change="editTask">
   <option v-for="s in sprints" :key="s.id" :value="s.id" >
     {{ s.name }}
   </option>
@@ -41,9 +41,15 @@
 import { computed, ref } from '@vue/reactivity'
 import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
+import { tasksService } from '../services/TasksService'
 export default {
-   
-    setup(){
+   props: {
+       task: {
+           type: Object,
+           required: true
+       }
+   },
+    setup(props){
         const editable = ref({})
         
         return {
@@ -51,7 +57,9 @@ export default {
             
             sprints: computed(() => AppState.sprints),
            async editTask(){
-              logger.log(editable.value)
+                logger.log(props.task)
+                
+              await tasksService.edit(props.task)
            }
         }
     }

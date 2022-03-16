@@ -28,7 +28,7 @@
 </div>
        <Modal id="edit-task">
            <template #title> Edit Task</template>
-      <template #body><EditTask /> </template>
+      <template #body><EditTask :task="task" /> </template>
            </Modal>
   
 

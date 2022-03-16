@@ -54,10 +54,11 @@ export default {
             editable,
               async createTask(){
                 try {
+                    logger.log(props.sprint.id)
                     editable.value.sprintId = props.sprint.id
                     await tasksService.createTask(AppState.activeProject.id, editable.value)
                     Modal.getOrCreateInstance(
-              document.getElementById("create-task")
+              document.getElementById(`create-task` + `${props.sprint.id}`)
             ).hide();
                 } catch (error) {
                     logger.error(error.message)
