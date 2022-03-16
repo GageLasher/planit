@@ -11,7 +11,7 @@
             <input v-model="task.weight" type="number" name="" id="">
         </div>
          <div class="col-12">
-            <select v-model="task.sprintId" @change="editTask">
+            <select v-model="editable.sprintId" >
   <option v-for="s in sprints" :key="s.id" :value="s.id" >
     {{ s.name }}
   </option>
@@ -57,6 +57,8 @@ export default {
             
             sprints: computed(() => AppState.sprints),
            async editTask(){
+                logger.log(editable.value.sprintId)
+                props.task.sprintId = editable.value.sprintId
                 logger.log(props.task)
                 
               await tasksService.edit(props.task)

@@ -7,7 +7,7 @@
        <input type="checkbox" v-model="task.isComplete" @change="save">
        <p class="ms-3"> {{task.name}} </p>
        <i class="mdi mdi-pencil selectable ms-5" title="edit task" data-bs-toggle="modal"
-            data-bs-target="#edit-task"></i>
+            :data-bs-target="`#edit-task` + task.id"></i>
        <i class="mdi mdi-delete selectable ms-5" @click="remove(task.id)" title="delete task"></i>
        
        </div>
@@ -26,7 +26,7 @@
 
     </div>
 </div>
-       <Modal id="edit-task">
+       <Modal :id="`edit-task` + task.id">
            <template #title> Edit Task</template>
       <template #body><EditTask :task="task" /> </template>
            </Modal>
