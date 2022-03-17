@@ -10,12 +10,18 @@ class NotesService {
         // logger.log(AppState.notes)
     }
     async getNotes(id){
-        const res = await api.get('api/projects/' +id + '/notes')
-        AppState.notes = res.data
+        if(id){
+
+            const res = await api.get('api/projects/' +id + '/notes')
+            AppState.notes = res.data
+        }
     }
     async remove(id){
-        const res = await api.delete('api/projects/' + AppState.activeProject.id + '/notes/' + id)
-        AppState.notes = AppState.notes.filter(n => n.id !== id)
+        if(id){
+
+            const res = await api.delete('api/projects/' + AppState.activeProject.id + '/notes/' + id)
+            AppState.notes = AppState.notes.filter(n => n.id !== id)
+        }
     }
 }
 

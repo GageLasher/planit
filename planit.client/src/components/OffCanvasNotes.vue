@@ -38,9 +38,11 @@ export default {
         }
     },
     setup(props){
-       watchEffect(async () => {
-            try {
-                await notesService.getNotes(AppState.activeProject.id)
+       if(AppState.activeProject.id){
+
+           watchEffect(async () => {
+               try {
+                   await notesService.getNotes(AppState.activeProject.id)
                
             } catch (error) {
                 logger.error(error.message)
@@ -48,6 +50,7 @@ export default {
             }
             
         })
+                }
         const editable = ref({})
         return {
             editable,

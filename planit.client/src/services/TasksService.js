@@ -11,9 +11,12 @@ class TasksService{
 
 
     async getTasks(id){
-        const res = await api.get('api/projects/'+ id +'/tasks')
-        // logger.log(res.data)
-        AppState.tasks = res.data
+        if(id){
+
+            const res = await api.get('api/projects/'+ id +'/tasks')
+            // logger.log(res.data)
+            AppState.tasks = res.data
+        }
     }
 
    
