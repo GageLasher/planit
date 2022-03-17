@@ -18,6 +18,13 @@
            </div>
            <div class="col-12">
                <h4 class="purple">
+                   {{notes.length}}
+                   <a class="btn btn-primary" data-bs-toggle="offcanvas" :href="'#offcanvas' + task.id" role="button" aria-controls="offcanvasExample">
+   <i class="mdi mdi-note-plus-outline selectable" title="view notes" > </i>
+</a>
+                  
+                        
+
                        {{task.weight}}
                <i class="mdi mdi-weight"> </i>
                    
@@ -30,12 +37,14 @@
            <template #title> Edit Task</template>
       <template #body><EditTask :task="task" /> </template>
            </Modal>
+           <OffCanvasNotes :task="task" :id="'offcanvas' + task.id"/>
   
 
 </template>
 
 
 <script>
+import { computed } from '@vue/reactivity'
 import { AppState } from '../AppState'
 import { tasksService } from '../services/TasksService'
 import { logger } from '../utils/Logger'
@@ -49,6 +58,7 @@ export default {
     },
     setup(props){
         return {
+            notes: computed(() => AppState.notes.filter(n => n.taskId == props.task.id)),
             async remove(id){
                 try {
                     await tasksService.remove(AppState.activeProject.id, id)
@@ -74,5 +84,9 @@ export default {
 <style lang="scss" scoped>
 .purple {
     color: rgba(202, 65, 202, 0.795);
+}
+a{
+    text-decoration: none;
+    background-color: rgba(202, 65, 202, 0.795);
 }
 </style>
