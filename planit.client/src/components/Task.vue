@@ -8,7 +8,7 @@
        <p class="ms-3"> {{task.name}} </p>
        <i class="mdi mdi-pencil selectable ms-5" title="edit task" data-bs-toggle="modal"
             :data-bs-target="`#edit-task` + task.id"></i>
-       <i class="mdi mdi-delete selectable ms-5" @click="remove(task.id)" title="delete task"></i>
+       <i class="mdi mdi-delete selectable ms-5"  @click="remove(task.id)" title="delete task"></i>
        
        </div>
       <div class="col-12">
@@ -59,6 +59,7 @@ export default {
     setup(props){
         return {
             notes: computed(() => AppState.notes.filter(n => n.taskId == props.task.id)),
+            account: computed(() => AppState.account),
             async remove(id){
                 try {
                     if(await Pop.confirm()){

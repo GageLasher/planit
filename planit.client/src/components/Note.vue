@@ -3,7 +3,7 @@
         <div class="d-flex">
 
         <img :src="note.creator.picture" alt="" class="img-fluid pp me-2">
-         {{note.creator.email}} 
+         {{note.creator.name}} 
           <i class="mdi mdi-delete selectable ms-5" @click="remove(note.id)" title="delete note"></i>
         </div>
         <p> {{note.body}} </p>
