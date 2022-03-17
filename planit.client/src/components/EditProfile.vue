@@ -72,5 +72,7 @@ export default {
     border: 3px solid rgb(180, 43, 180);
     height: 20vh;
     width: 20vh;
+    object-fit: cover;
+    
 }
 </style>

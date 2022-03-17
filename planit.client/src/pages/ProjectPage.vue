@@ -86,10 +86,13 @@ export default {
             sprints: computed(() => AppState.sprints),
             async remove(id){
                 try {
-                    await projectsService.remove(id)
-                    router.push({
+                    if(await Pop.confirm()){
+
+                        await projectsService.remove(id)
+                     router.push({
                         name: 'Home',
                     })
+                    }
                 } catch (error) {
                      logger.error(error.message)
                 Pop.toast(error.message, "error")

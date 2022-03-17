@@ -61,7 +61,10 @@ export default {
             notes: computed(() => AppState.notes.filter(n => n.taskId == props.task.id)),
             async remove(id){
                 try {
-                    await tasksService.remove(AppState.activeProject.id, id)
+                    if(await Pop.confirm()){
+
+                        await tasksService.remove(AppState.activeProject.id, id)
+                    }
                 } catch (error) {
                     logger.error(error)
                     Pop.toast(error.message, "error")

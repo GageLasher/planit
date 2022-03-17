@@ -82,7 +82,10 @@ export default {
             }),
             async remove(id){
                 try {
+                    if(await Pop.confirm()){
+
                         await sprintsService.remove(AppState.activeProject.id, id)
+                    }
                 } catch (error) {
                     logger.error(error.message)
                     Pop.toast(error.message, 'error')

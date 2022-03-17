@@ -30,5 +30,6 @@ export default {
     border-radius: 50%;
     height: 10vh;
     width: 10vh;
+    object-fit: cover;
 }
 </style>

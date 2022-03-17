@@ -26,7 +26,10 @@ export default {
         return {
             async remove(id){
                 try {
+                    if(await Pop.confirm()){
+
                         await notesService.remove(id)
+                    }
                 } catch (error) {
                     logger.error(error)
                     Pop.toast(error.message, 'error')
@@ -47,6 +50,7 @@ export default {
     width: 5vh;
     border: 2px solid rgb(190, 25, 190);
     border-radius: 50%;
+    object-fit: cover;
 
 }
 </style>

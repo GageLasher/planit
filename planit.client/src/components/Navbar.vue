@@ -53,7 +53,7 @@
                data-bs-toggle="modal"
             data-bs-target="#edit-profile"
             />
-            <span class="mx-3 text-success lighten-30">{{ account.name }}</span>
+            <span class="mx-3 text-dark lighten-5">{{ account.name }}</span>
           </div>
           <div
             class="dropdown-menu p-0 list-group w-100"
