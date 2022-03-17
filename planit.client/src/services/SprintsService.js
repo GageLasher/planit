@@ -10,7 +10,7 @@ class SprintsService {
     }
     async getSprints(id){
         const res = await api.get('api/projects/'+ id +'/sprints')
-        logger.log(res.data)
+        // logger.log(res.data)
         AppState.sprints = res.data
     }
     async remove( projectId ,id){

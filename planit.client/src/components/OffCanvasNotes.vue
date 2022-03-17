@@ -54,7 +54,7 @@ export default {
             notes: computed(() => AppState.notes.filter(n => n.taskId == props.task.id)),
            async addNote(){
                try {
-                   logger.log(editable.value)
+                //    logger.log(editable.value)
                    editable.value.taskId = props.task.id
                    await notesService.addNote(AppState.activeProject.id, editable.value)
                    editable.value = {}

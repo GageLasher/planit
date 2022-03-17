@@ -5,9 +5,9 @@ import { api } from "./AxiosService"
 class NotesService {
     async addNote(projectId, body){
         const res = await api.post('api/projects/' + projectId + '/notes', body)
-        logger.log(res.data)
+        // logger.log(res.data)
         AppState.notes = [...AppState.notes, res.data]
-        logger.log(AppState.notes)
+        // logger.log(AppState.notes)
     }
     async getNotes(id){
         const res = await api.get('api/projects/' +id + '/notes')

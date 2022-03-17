@@ -54,7 +54,7 @@ export default {
             editable,
               async createTask(){
                 try {
-                    logger.log(props.sprint.id)
+                    // logger.log(props.sprint.id)
                     editable.value.sprintId = props.sprint.id
                     await tasksService.createTask(AppState.activeProject.id, editable.value)
                     Modal.getOrCreateInstance(

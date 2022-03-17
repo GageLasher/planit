@@ -1,9 +1,12 @@
 <template>
+
+
  <div class="col-4">{{project.name}} </div>
  <div class="col-4"> 
      <img :src="project.creator.picture" alt="" class="img-fluid profile-picture">
  </div>
  <div class="col-4">{{new Date(project.createdAt).toDateString()}} </div>
+
 </template>
 
 

@@ -14,7 +14,7 @@
        <div class="col-4">Member</div>
        <div class="col-4">Started</div>
      </div>
-     <div class="row p-3" v-for="p in projects" :key="p.id">
+     <div class="row p-3 selectable" v-for="p in projects" :key="p.id" @click="goTo(p.id)">
        <Project :project="p" />
      </div>
    </div>
@@ -38,9 +38,11 @@ import { onMounted, watchEffect } from '@vue/runtime-core'
 import { logger } from '../utils/Logger'
 import Pop from '../utils/Pop'
 import { projectsService } from '../services/ProjectsService'
+import { useRouter } from 'vue-router'
 export default {
   name: 'Home',
    setup() {
+     const router = useRouter()
     //  watchEffect(async ()=> {
       
     //      try {
@@ -58,7 +60,19 @@ export default {
     //  })
     return {
       account: computed(() => AppState.account),
-      projects: computed(() => AppState.projects)
+      projects: computed(() => AppState.projects),
+      async goTo(id){
+        try {
+            await projectsService.getActiveProject(id)
+          router.push({
+                        name: 'Project',
+                        params: {id: AppState.activeProject.id}
+                    })
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
+      }
     }
   }
 }

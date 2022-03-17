@@ -11,7 +11,7 @@ class ProjectsService {
     }
     async createProject(body){
         const res = await api.post('api/projects', body)
-        logger.log(res.data)
+        // logger.log(res.data)
         AppState.projects = [...AppState.projects, res.data]
         AppState.activeProject = res.data
     }
